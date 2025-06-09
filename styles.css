@@ -1,0 +1,353 @@
+/* Variables para colores */
+:root {
+    /* Colores claros */
+    --light-bg: #f0f4f8; /* Fondo principal muy claro, casi blanco azulado */
+    --light-text: #334e68; /* Texto oscuro para contraste */
+    --light-navbar-bg: #ffffff; /* Barra de navegación blanca */
+    --light-sidebar-bg: #e2e8f0; /* Fondo del sidebar un poco más oscuro que el fondo */
+    --light-link-hover: #cbd5e0; /* Hover de enlaces en sidebar */
+    --light-accent-color: #6a9cff; /* Azul suave para acentos */
+    --light-border-color: #d1d9e6; /* Borde suave */
+
+    /* Colores oscuros */
+    --dark-bg: #1a202c; /* Fondo principal oscuro */
+    --dark-text: #e2e8f0; /* Texto claro para contraste */
+    --dark-navbar-bg: #2d3748; /* Barra de navegación oscura */
+    --dark-sidebar-bg: #2d3748; /* Fondo del sidebar oscuro */
+    --dark-link-hover: #4a5568; /* Hover de enlaces en sidebar oscuro */
+    --dark-accent-color: #90cdf4; /* Azul claro para acentos en modo oscuro */
+    --dark-border-color: #4a5568; /* Borde suave oscuro */
+}
+
+/* Modo oscuro */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+body.dark-mode .navbar {
+    background-color: var(--dark-navbar-bg);
+    border-bottom-color: var(--dark-border-color);
+}
+
+body.dark-mode .sidebar {
+    background-color: var(--dark-sidebar-bg);
+    border-right-color: var(--dark-border-color);
+}
+
+body.dark-mode .sidebar a {
+    color: var(--dark-text);
+}
+
+body.dark-mode .sidebar a:hover {
+    background-color: var(--dark-link-hover);
+}
+
+body.dark-mode .menu-toggle,
+body.dark-mode .dark-mode-toggle {
+    background-color: var(--dark-navbar-bg);
+    color: var(--dark-text);
+    border-color: var(--dark-border-color);
+}
+
+/* Estilos generales */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Barra de Navegación Superior */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--light-navbar-bg);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--light-border-color);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar .logo img {
+    height: 40px;
+    width: auto;
+}
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-toggle,
+.dark-mode-toggle {
+    background: none;
+    border: 1px solid var(--light-border-color);
+    border-radius: 5px;
+    color: var(--light-text);
+    font-size: 1.2rem;
+    padding: 0.5rem 0.8rem;
+    cursor: pointer;
+    margin-left: 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.menu-toggle:hover,
+.dark-mode-toggle:hover {
+    background-color: var(--light-link-hover);
+}
+
+/* Sidebar (Menú Desplegable) */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -280px; /* Oculto por defecto */
+    width: 250px;
+    height: 100%;
+    background-color: var(--light-sidebar-bg);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    padding-top: 60px; /* Espacio para la barra de navegación */
+    transition: left 0.3s ease-in-out, background-color 0.3s ease, border-color 0.3s ease;
+    z-index: 999;
+    border-right: 1px solid var(--light-border-color);
+}
+
+.sidebar.active {
+    left: 0; /* Muestra el sidebar */
+}
+
+.sidebar-header {
+    text-align: center;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--light-border-color);
+    margin-bottom: 20px;
+}
+
+.sidebar-header .profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--light-accent-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-header .username {
+    margin-top: 10px;
+    font-weight: 600;
+    color: var(--light-text);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav ul li a {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: var(--light-text);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav ul li a i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    color: var(--light-accent-color);
+}
+
+.sidebar-nav ul li a:hover {
+    background-color: var(--light-link-hover);
+    color: var(--light-text);
+}
+
+/* Contenido Principal (para el index.html) */
+.content {
+    margin-left: 0; /* Sin margen por defecto, se ajusta con el sidebar */
+    padding: 80px 20px 20px 20px; /* Espacio para la barra de navegación */
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Estilos para los contenedores de formularios en las páginas PHP */
+.form-container {
+    max-width: 500px;
+    margin: 100px auto 20px auto; /* Ajusta el margen superior para la navbar */
+    padding: 30px;
+    background-color: var(--light-navbar-bg); /* O un color que combine */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--light-border-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+body.dark-mode .form-container {
+    background-color: var(--dark-navbar-bg);
+    border-color: var(--dark-border-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.form-container h2 {
+    text-align: center;
+    color: var(--light-accent-color);
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+body.dark-mode .form-container h2 {
+    color: var(--dark-accent-color);
+}
+
+.form-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--light-text);
+}
+
+body.dark-mode .form-container label {
+    color: var(--dark-text);
+}
+
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="number"],
+.form-container input[type="url"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid var(--light-border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: var(--light-bg);
+    color: var(--light-text);
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+body.dark-mode .form-container input[type="text"],
+body.dark-mode .form-container input[type="email"],
+body.dark-mode .form-container input[type="password"],
+body.dark-mode .form-container input[type="number"],
+body.dark-mode .form-container input[type="url"] {
+    background-color: var(--dark-bg);
+    border-color: var(--dark-border-color);
+    color: var(--dark-text);
+}
+
+
+.form-container input[type="text"]:focus,
+.form-container input[type="email"]:focus,
+.form-container input[type="password"]:focus,
+.form-container input[type="number"]:focus,
+.form-container input[type="url"]:focus {
+    outline: none;
+    border-color: var(--light-accent-color);
+    box-shadow: 0 0 0 2px rgba(106, 156, 255, 0.3);
+}
+
+body.dark-mode .form-container input[type="text"]:focus,
+body.dark-mode .form-container input[type="email"]:focus,
+body.dark-mode .form-container input[type="password"]:focus,
+body.dark-mode .form-container input[type="number"]:focus,
+body.dark-mode .form-container input[type="url"]:focus {
+    border-color: var(--dark-accent-color);
+    box-shadow: 0 0 0 2px rgba(144, 205, 244, 0.3);
+}
+
+.form-container input[type="submit"] {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: var(--light-accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container input[type="submit"]:hover {
+    background-color: #5380d1; /* Un poco más oscuro */
+}
+
+body.dark-mode .form-container input[type="submit"] {
+    background-color: var(--dark-accent-color);
+    color: var(--dark-bg);
+}
+
+body.dark-mode .form-container input[type="submit"]:hover {
+    background-color: #71b9eb; /* Un poco más oscuro */
+}
+
+.form-container p.error-message,
+.form-container p[style*="color: red;"] {
+    color: red;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+
+/* Media Queries para responsividad (opcional) */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+
+    .navbar .logo img {
+        height: 35px;
+    }
+
+    .menu-toggle,
+    .dark-mode-toggle {
+        font-size: 1rem;
+        padding: 0.4rem 0.7rem;
+    }
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .sidebar-header .profile-pic {
+        width: 60px;
+        height: 60px;
+    }
+
+    .sidebar-nav ul li a {
+        font-size: 0.9rem;
+        padding: 10px 15px;
+    }
+
+    .sidebar-nav ul li a i {
+        font-size: 1rem;
+    }
+
+    .form-container {
+        padding: 20px;
+        margin: 80px 15px 15px 15px;
+    }
+
+    .form-container h2 {
+        font-size: 1.5rem;
+    }
+}
