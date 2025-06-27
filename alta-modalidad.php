@@ -4,7 +4,7 @@ include "conexion.php"; // Asegúrate de que la ruta a 'conexion.php' sea correc
 $nombre = $_POST['nombre-modalidad'] ?? ''; // Usamos el operador ?? para evitar errores si no se ha enviado el formulario.
 
 if(!empty($nombre)){
-    mysqli_query($conn, "INSERT INTO modalidad (modalidad) VALUES ('$nombre');");
+    mysqli_query($conn, "INSERT INTO modalidad (moda) VALUES ('$nombre');");
     mysqli_close($conn);
     // Opcional: podrías agregar una redirección o un mensaje de éxito aquí.
     // header("Location: alguna_pagina_de_exito.php");
