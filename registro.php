@@ -72,7 +72,8 @@ placeholder="E-Mail" value="<?php echo htmlspecialchars($mail); ?>"><br><br>
 <input type="text" id="usuario" name="usuario"
 placeholder="Usuario" value="<?php echo htmlspecialchars($usuario); ?>"><br><br>
 <input type="password" id="passwd" name="passwd"
-placeholder="Contraseña" value=""><br><br> <input type="submit" value="Registrar">
+placeholder="Contraseña" value=""><br><br>
+<input type="submit" value="Registrar">
 </form>
 </body>
 </html>

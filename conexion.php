@@ -10,6 +10,6 @@ $conn = mysqli_connect($host, $usuario, $contrasena, $base_de_datos);
 if (!$conn) {
 die("Conexión fallida: ".mysqli_connect_error());
 }else{
-echo "Conexión exitosa a: {$base_de_datos}, usuario: {$usuario}, host: {$host} <br>";
+//echo "Conexión exitosa a: {$base_de_datos}, usuario: {$usuario}, host: {$host} <br>";
 }
 ?>

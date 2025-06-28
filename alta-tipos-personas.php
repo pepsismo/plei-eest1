@@ -6,9 +6,6 @@ $tipo = $_POST['tipo'] ?? ''; // Usamos el operador ?? para evitar errores si no
 if(!empty($tipo)){
     mysqli_query($conn, "INSERT INTO tipos_personas (tipo) VALUES ('$tipo');");
     mysqli_close($conn);
-    // Opcional: podrías agregar una redirección o un mensaje de éxito aquí.
-    // header("Location: alguna_pagina_de_exito.php");
-    // exit();
 }
 ?>
 <!DOCTYPE html>
@@ -16,10 +13,11 @@ if(!empty($tipo)){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
-    <h2>carga de tipo de personas</h2>
+    <h2>CARGA DE TIPOS DE PERSONAS</h2>
     <form action="" method="post"> <label for="tipo">tipo de persona a agregar</label><br>
         <input type="text" name="tipo" id="tipo" value="<?php echo htmlspecialchars($tipo); ?>"><br><br>
         <input type="submit" value="cargrar">

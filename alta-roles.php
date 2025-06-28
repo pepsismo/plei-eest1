@@ -6,9 +6,6 @@ $rol = $_POST['rol'] ?? ''; // Usamos el operador ?? para evitar errores si no s
 if(!empty($rol)){
     mysqli_query($conn, "INSERT INTO roles (rol) VALUES ('$rol');");
     mysqli_close($conn);
-    // Opcional: podrías agregar una redirección o un mensaje de éxito aquí.
-    // header("Location: alguna_pagina_de_exito.php");
-    // exit();
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +17,7 @@ if(!empty($rol)){
     <title>Document</title>
 </head>
 <body>
-    <h2>carga de roles</h2>
+    <h2>CARGA DE ROLES</h2>
     <form action="" method="post"> <label for="rol">rol a agregar</label><br>
         <input type="text" name="rol" id="rol" value="<?php echo htmlspecialchars($rol); ?>"><br><br>
         <input type="submit" value="cargar">
