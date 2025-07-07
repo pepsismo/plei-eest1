@@ -23,6 +23,12 @@ if($resultado){
     }
 }
 
+$resultado = mysqli_query($conn, "SELECT id_persona, nombre, apellido, dni, tipos_personas.tipo FROM personas INNER JOIN tipos_personas on personas.id_tipo_persona = tipos_personas.id_tipo_persona where tipos_personas.tipo = 'preceptor';");
+if($resultado){
+    while ($_prece = mysqli_fetch_assoc($resultado)){
+        $preceptor[] = $_prece;
+    }
+}
 
 if(!empty($grado)){
     mysqli_query($conn, "INSERT INTO cursos (grado, id_modalidad, id_seccion, id_preceptor a cargo) VALUES($grado, 1, 1, 1);");
@@ -60,6 +66,11 @@ if(!empty($grado)){
         </select>
         <select name="preceptor" id="preceptor">
             <option hidden selected>preceptor</option>
+            <?php foreach ($preceptor as $prece_){?>
+            <option value="<?php echo htmlspecialchars($prece_['id_persona']);?>">
+            <?php echo htmlspecialchars($prece_['nombre']); echo " ".htmlspecialchars($prece_['apellido']); echo " ".htmlspecialchars($prece_['dni']); ?>
+            </option>
+            <?php }?>
         </select>
         <input type="submit" value="cargar">
     </form>
