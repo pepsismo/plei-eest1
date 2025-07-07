@@ -180,7 +180,6 @@ body {
 /* Contenido Principal */
 .content {
     margin-left: 0; /* Sin margen por defecto, se ajusta con el sidebar */
-    padding: 80px 20px 20px 20px; /* Espacio para la barra de navegación */
     transition: margin-left 0.3s ease-in-out;
 }
 
@@ -223,6 +222,8 @@ body {
     }
 }
 
-.fa-brands{
-    margin-left: 100px;
+.carousel{
+    opacity: 50%;
+    margin: 0;
+    padding: 0;
 }
