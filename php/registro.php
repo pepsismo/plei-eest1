@@ -11,6 +11,9 @@ $passwd = $_POST['passwd'];
 $rol = $_POST['rol'];
 $tipo_persona = $_POST['tipo_persona'];
 
+$tipo = [];
+$rols = [];
+
 $resultado = mysqli_query($conn, "SELECT * FROM tipos_personas;");
 if($resultado){
     while ($_tipo = mysqli_fetch_assoc($resultado)){
@@ -21,12 +24,12 @@ if($resultado){
 $resultado = mysqli_query($conn, "SELECT * FROM roles;");
 if($resultado){
     while ($_rol = mysqli_fetch_assoc($resultado)){
-        $rol[] = $_rol;
+        $rols[] = $_rol;
     }
 }
 
 if(!empty($nombre) && !empty($apellido) && !empty($mail) && !empty($usuario) && !empty($dni) && !empty($passwd) && !empty($rol) && !empty($tipo_persona)){
-    mysqli_query($conn, "INSERT INTO personas (dni,apellido,nombre,mail,usuario,passwd,id_rol,id_tipo_persona) VALUES ($dni, $apellido, $nombre, $mail, $usuario, $passwd, $rol, $tipo_persona);");
+    mysqli_query($conn, "INSERT INTO personas (dni, apellido, nombre, mail, usuario, passwd, id_rol, id_tipo_persona) VALUES ('$dni', '$apellido', '$nombre', '$mail', '$usuario', '$passwd', '$rol', '$tipo_persona')");
     mysqli_close($conn);
 }
 
@@ -41,7 +44,8 @@ if(!empty($nombre) && !empty($apellido) && !empty($mail) && !empty($usuario) && 
 </head>
 <body>
 <h2>Formulario de Registro</h2>
-<form action="" method="post"> <input type="number" id="dni" name="dni"
+<form action="" method="post"> 
+<input type="number" id="dni" name="dni"
 placeholder="DNI" value="<?php echo htmlspecialchars($dni); ?>"><br><br>
 <input type="text" id="nombre" name="nombre"
 placeholder="Nombre" value="<?php echo htmlspecialchars($nombre); ?>"><br><br>
@@ -64,7 +68,7 @@ placeholder="Contraseña" value=""><br><br>
 
 <select name="rol" id="rol">
     <option hidden selected>rol</option>
-    <?php foreach ($rol as $rol_) {?>
+    <?php foreach ($rols as $rol_) {?>
     <option value="<?php echo htmlspecialchars($rol_['id_rol']);?>">
     <?php echo htmlspecialchars($rol_['rol']);?>
     </option>
