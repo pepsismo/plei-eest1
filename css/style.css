@@ -113,7 +113,7 @@ body {
 /* Sidebar (Menú Desplegable) */
 .sidebar {
     position: fixed;
-    top: 0; /* Ajustado para que el sidebar empiece desde arriba */
+    top: 0;/* Ajustado para que el sidebar empiece desde arriba */
     left: -280px; /* Oculto por defecto */
     width: 250px;
     height: 100%;
@@ -123,6 +123,8 @@ body {
     transition: left 0.3s ease-in-out, background-color 0.3s ease, border-color 0.3s ease;
     z-index: 999;
     border-right: 1px solid var(--light-border-color);
+    overflow-y: auto;
+    
 }
 
 .sidebar.active {

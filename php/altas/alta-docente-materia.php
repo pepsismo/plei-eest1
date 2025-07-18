@@ -4,15 +4,24 @@ include "conexion.php";
 $docentes = [];
 $materias = [];
 
-$resultado = mysqli_query($conn, "SELECT id_persona, nombre, apellido, dni, tipos_personas.tipo FROM personas INNER JOIN tipos_personas on personas.id_tipo_persona = tipos_personas.id_tipo_persona where tipos_personas.tipo = 'docente';");
+$resultado = mysqli_query($conn, "SELECT id_persona, nombre, apellido, dni, tipos_personas.tipo FROM personas INNER JOIN tipos_personas on personas.id_tipo_persona = tipos_personas.id_tipo_persona where tipos_personas.tipo = 'profesor'");
 if($resultado){
     while($_docente = mysqli_fetch_assoc($resultado)){
-        $docente[] = $_docente;
+        $docentes[] = $_docente;
     }
 }
 
 $docente = $_POST['docente'];
 $materia = $_POST['materia'];
+
+$resultado = mysqli_query($conn, "SELECT * FROM materias");
+if($resultado){
+    while($_materias = mysqli_fetch_assoc($resultado)){
+        $materias[] = $_materias;
+    }
+}
+
+
 
 
 if (!empty($docentes) && !empty($materia)){
@@ -33,7 +42,7 @@ if (!empty($docentes) && !empty($materia)){
     <form action="" method="post">
         <select name="docente" id="docente">
             <option hidden selected>docente</option>
-            <?php foreach ($docente as $docente_){ ?>
+            <?php foreach ($docentes as $docente_){ ?>
             <option value="<?php echo htmlspecialchars($docente_['id_persona']);?>">
             <?php echo htmlspecialchars($docente_['nombre'])." ".htmlspecialchars($docente_['apellido']); ?>
             </option>
@@ -41,6 +50,11 @@ if (!empty($docentes) && !empty($materia)){
         </select>
         <select name="materia" id="materia">
             <option hidden selected>materia</option>
+            <?php foreach ($materias as $materias_){?>
+                <option value="<?php echo htmlspecialchars($materias_['id_materia']);?>>">
+                    <?php echo htmlspecialchars($materias_['nombre_materia']); ?>
+                </option>
+            <?php }?>
         </select>
         <input type="submit" value="cargar">
     </form>

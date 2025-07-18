@@ -1,7 +1,7 @@
 <?php
 include "conexion.php";
 
-$resultado = mysqli_query($conn, "SELECT * FROM personas INNER JOIN tipos_personas on personas.id_tipo_persona = tipos_personas.id_tipo_persona where tipos_personas.tipo = 'profesor';")
+$resultado = mysqli_query($conn, "SELECT * FROM personas INNER JOIN tipos_personas on personas.id_tipo_persona = tipos_personas.id_tipo_persona where tipos_personas.tipo = 'alumno';")
 ?>
 
 <!DOCTYPE html>
@@ -13,20 +13,19 @@ $resultado = mysqli_query($conn, "SELECT * FROM personas INNER JOIN tipos_person
     <title>Document</title>
 </head>
 <body>
-    
-<h2>Listado de Profesores</h2>
-
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Apellido</th>
-        <th>Correo</th>
-        <th>DNI</th>
-    </tr>
-
-    <?php
-    $contador = 1;
+    <h2>Listado de Alumnos</h2>
+    <div class="tabla">    
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>DNI</th>
+        </tr>
+        
+        <?php
+        $contador = 1;
     if ($resultado) {
         while ($fila = $resultado->fetch_assoc()) {
             echo "<tr>";
@@ -44,5 +43,6 @@ $resultado = mysqli_query($conn, "SELECT * FROM personas INNER JOIN tipos_person
     $conexion->close();
     ?>
 </table>
+</div>
 </body>
 </html>
