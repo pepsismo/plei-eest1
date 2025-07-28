@@ -28,8 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-        // Cargar la preferencia del modo oscuro al cargar la página
+    // Cargar la preferencia del modo oscuro al cargar la página
     if (localStorage.getItem('darkMode') === 'enabled') {
         body.classList.add('dark-mode');
     }
+
+    // Función de los menus colapsables
+    document.querySelectorAll('.collapsible').forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.classList.toggle('active');
+            const submenu = this.nextElementSibling;
+            if (submenu.style.display === "block") {
+                submenu.style.display = "none";
+            } else {
+                submenu.style.display = "block";
+            }
+        });
+    });
 });

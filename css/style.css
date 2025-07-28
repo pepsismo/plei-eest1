@@ -50,6 +50,26 @@ body.dark-mode .dark-mode-toggle {
     border-color: var(--dark-border-color);
 }
 
+/* Muestra la imagen clara por defecto, oculta la oscura */
+.logo-img-light {
+    display: block;
+}
+.logo-img-dark {
+    display: none;
+}
+
+/* En modo oscuro, oculta la clara y muestra la oscura */
+body.dark-mode .logo-img-light {
+    display: none;
+}
+body.dark-mode .logo-img-dark {
+    display: block;
+}
+
+body.dark-mode p{
+    color: var(--dark-text);
+}
+
 /* Estilos generales */
 * {
     box-sizing: border-box;
@@ -57,7 +77,13 @@ body.dark-mode .dark-mode-toggle {
     padding: 0;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     background-color: var(--light-bg);
@@ -82,9 +108,14 @@ body {
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
+.navbar .logo {
+    display: flex;
+    align-items: center;
+}
+
 .navbar .logo img {
     height: 40px;
-    width: auto;
+    width: 40px;
 }
 
 .navbar-right {
@@ -113,18 +144,18 @@ body {
 /* Sidebar (Menú Desplegable) */
 .sidebar {
     position: fixed;
-    top: 0;/* Ajustado para que el sidebar empiece desde arriba */
+    top: 60px; /* Changed from 0 to the height of your navbar */
     left: -280px; /* Oculto por defecto */
     width: 250px;
-    height: 100%;
+    height: calc(100% - 60px); /* Adjust height to fill the remaining space */
+    /* margin-top: 0; Remove this, it's redundant with 'top' */
     background-color: var(--light-sidebar-bg);
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    padding-top: 60px; /* Espacio para la barra de navegación */
+    padding-top: 20px; /* Adjust this if needed, it's internal padding, not for positioning */
     transition: left 0.3s ease-in-out, background-color 0.3s ease, border-color 0.3s ease;
     z-index: 999;
     border-right: 1px solid var(--light-border-color);
     overflow-y: auto;
-    
 }
 
 .sidebar.active {
@@ -181,8 +212,68 @@ body {
 
 /* Contenido Principal */
 .content {
-    margin-left: 0; /* Sin margen por defecto, se ajusta con el sidebar */
+    margin-left: 0; /* Adjusted by JS when sidebar is active */
     transition: margin-left 0.3s ease-in-out;
+    padding: 20px;
+    padding-top: 80px; /* This ensures content starts below the navbar */
+    min-height: calc(100vh - 80px); /* This is the key change */
+    /* 100vh makes it take full viewport height, minus navbar height */
+    box-sizing: border-box; /* Include padding in height calculation */
+}
+
+main.content{
+    flex-grow: 1; /* Ensures content takes up remaining space */
+}
+
+.submenu {
+    display: none; /* Oculto por defecto */
+    list-style: none;
+    padding-left: 20px;
+    margin: 0;
+}
+.collapsible {
+    background: none;
+    border: none;
+    color: var(--light-text);
+    width: 100%;
+    text-align: left;
+    padding: 12px 20px;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.collapsible i {
+    margin-right: 10px;
+    font-size: 1.1rem;
+    color: var(--light-accent-color);
+}
+
+.collapsible p {
+    margin: 0 0 0 8px;
+    color: rgb(45, 165, 45);
+    display: inline;
+}
+
+.collapsible:hover,
+.collapsible.active {
+    background-color: var(--light-link-hover);
+    color: var(--light-text);
+    text-decoration: none;
+}
+
+body.dark-mode .collapsible {
+    color: var(--dark-text);
+}
+
+body.dark-mode .collapsible:hover,
+body.dark-mode .collapsible.active {
+    background-color: var(--dark-link-hover);
+    color: var(--dark-text);
 }
 
 /* Media Queries para responsividad (opcional) */
@@ -222,10 +313,26 @@ body {
     .sidebar-nav ul li a i {
         font-size: 1rem;
     }
+
+    .sidebar {
+        top: 51px; /* Example: If navbar height is 51px in mobile view based on 0.8rem padding and smaller font */
+        height: calc(100% - 51px);
+    }
 }
 
-.carousel{
-    opacity: 50%;
-    margin: 0;
-    padding: 0;
+/* Ensure the carousel container has a fixed height */
+.carousel {
+    height: 800px; /* Adjust this value as needed based on your preferred carousel height */
+    overflow: hidden; /* Hide any overflowing parts of the image */
+    opacity: 50%; /* */
+    margin: 0; /* */
+    padding: 0; /* */
+}
+
+/* Ensure images within the carousel fill their container */
+.carousel-item img {
+    height: 100%; /* Make the image take up 100% of the carousel item's height */
+    width: 100%; /* Make the image take up 100% of the carousel item's width */
+    object-fit: cover; /* This will crop the image to cover the area without distorting it */
+    /* Alternatively, use object-fit: contain; if you want the whole image to be visible, even if it leaves empty space */
 }
